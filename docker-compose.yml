@@ -1,0 +1,93 @@
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: wiki-namenode
+    restart: always
+    ports:
+      - "9872:9870"
+      - "9002:9000"
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=diss-cluster
+    env_file:
+      - ./hadoop.env
+
+  datanode-1:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: wiki-datanode1
+    restart: always
+    volumes:
+      - hadoop_datanode1:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "wiki-namenode:9870"
+    env_file:
+      - ./hadoop.env
+
+  datanode-2:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: wiki-datanode2
+    restart: always
+    volumes:
+      - hadoop_datanode2:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "wiki-namenode:9870"
+    env_file:
+      - ./hadoop.env
+
+  spark-master:
+    image: apache/spark:3.5.1
+    container_name: wiki-spark-master
+    restart: always
+    ports:
+      - "8100:8080"
+      - "7079:7077"
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    environment:
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+    volumes:
+      - .:/app
+      - spark_data:/data
+
+  spark-worker-1:
+    image: apache/spark:3.5.1
+    container_name: wiki-spark-worker1
+    restart: always
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    environment:
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
+    depends_on:
+      - spark-master
+
+  spark-worker-2:
+    image: apache/spark:3.5.1
+    container_name: wiki-spark-worker2
+    restart: always
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    environment:
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
+    depends_on:
+      - spark-master
+
+  mongodb:
+    image: mongo:7.0
+    container_name: wiki-mongodb
+    restart: always
+    ports:
+      - "27019:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode1:
+  hadoop_datanode2:
+  spark_data:
+  mongo_data:
