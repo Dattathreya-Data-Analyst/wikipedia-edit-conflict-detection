@@ -1,0 +1,219 @@
+2026-05-01 12:21:50  main  Wikipedia Edit Conflict Detection and Knowledge Stability Analysis starting
+2026-05-01 12:21:50  main  Pipeline targets 455 curated Wikipedia articles across political, scientific, and cultural domains
+2026-05-01 12:21:50  main  Analysing revision histories, editor networks, and pageview dynamics from 2020 to 2024
+2026-05-01 12:21:50  main  Phase 1: Acquiring Wikipedia revision histories and associated metadata
+2026-05-01 12:21:51  main  Starting stage Data Download
+2026-05-01 12:21:51  download_data  Starting data acquisition for Wikipedia edit conflict detection study
+2026-05-01 12:21:51  download_data  Curated article set contains 455 articles: 176 political, 131 scientific, 148 cultural
+2026-05-01 12:21:51  download_data  Fetching revision histories for 455 articles using parallel threads
+2026-05-01 12:21:51  download_data  Article set: 176 political, 131 scientific, 148 cultural
+2026-05-01 12:21:52  download_data  Revision download progress: 25/455 articles, 91118 total revisions collected
+2026-05-01 12:21:58  download_data  Revision download progress: 50/455 articles, 121120 total revisions collected
+2026-05-01 12:22:05  download_data  Revision download progress: 75/455 articles, 121125 total revisions collected
+2026-05-01 12:22:08  download_data  Revision download progress: 100/455 articles, 121125 total revisions collected
+2026-05-01 12:22:11  download_data  Revision download progress: 125/455 articles, 121125 total revisions collected
+2026-05-01 12:22:14  download_data  Revision download progress: 150/455 articles, 121191 total revisions collected
+2026-05-01 12:22:16  download_data  Revision download progress: 175/455 articles, 121191 total revisions collected
+2026-05-01 12:22:19  download_data  Revision download progress: 200/455 articles, 121191 total revisions collected
+2026-05-01 12:22:22  download_data  Revision download progress: 225/455 articles, 121192 total revisions collected
+2026-05-01 12:22:24  download_data  Revision download progress: 250/455 articles, 121192 total revisions collected
+2026-05-01 12:22:27  download_data  Revision download progress: 275/455 articles, 121192 total revisions collected
+2026-05-01 12:22:30  download_data  Revision download progress: 300/455 articles, 121411 total revisions collected
+2026-05-01 12:22:32  download_data  Revision download progress: 325/455 articles, 121411 total revisions collected
+2026-05-01 12:22:35  download_data  Revision download progress: 350/455 articles, 121417 total revisions collected
+2026-05-01 12:22:38  download_data  Revision download progress: 375/455 articles, 121417 total revisions collected
+2026-05-01 12:22:40  download_data  Revision download progress: 400/455 articles, 121417 total revisions collected
+2026-05-01 12:22:43  download_data  Revision download progress: 425/455 articles, 121417 total revisions collected
+2026-05-01 12:22:46  download_data  Revision download progress: 450/455 articles, 121417 total revisions collected
+2026-05-01 12:22:46  download_data  Revision download progress: 455/455 articles, 121417 total revisions collected
+2026-05-01 12:22:46  download_data  Revision download complete: 121417 total edits across 455 articles
+2026-05-01 12:22:46  download_data  Resolving Wikidata entities for 455 Wikipedia articles
+2026-05-01 12:23:38  download_data  Wikidata download complete: resolved 398 entities from 455 articles
+2026-05-01 12:23:38  download_data  Pulling pageview time series for 455 articles spanning 20200101 to 20241231
+2026-05-01 12:24:01  download_data  Pageview download complete: 819337 daily records across 455 articles
+2026-05-01 12:24:01  download_data  All Wikipedia data sources successfully acquired and cached locally
+2026-05-01 12:24:01  main  Completed stage Data Download in 130.2 seconds
+2026-05-01 12:24:01  main  Phase 2: Transferring Wikipedia datasets to HDFS for distributed analysis
+2026-05-01 12:24:01  main  Starting stage HDFS Ingestion
+2026-05-01 12:24:01  hdfs_ingest  Beginning HDFS ingestion of Wikipedia revision and metadata datasets
+2026-05-01 12:24:11  hdfs_ingest  Transferring 4.2 million revision records for curated Wikipedia article set to HDFS
+2026-05-01 12:24:11  hdfs_ingest  Uploaded 35 revision files containing 121417 edit records to /user/dattatheya/wikipedia/revisions
+2026-05-01 12:24:38  hdfs_ingest  Ingested 398 Wikidata entity records into HDFS at /user/dattatheya/wikidata/entities
+2026-05-01 12:25:19  hdfs_ingest  Loaded 819337 daily pageview observations for 452 articles into HDFS
+2026-05-01 12:25:19  hdfs_ingest  HDFS ingestion complete: 121417 revision records, 398 Wikidata entities, 819337 pageview records
+2026-05-01 12:25:19  hdfs_ingest  All Wikipedia data now available in HDFS for distributed Spark processing
+2026-05-01 12:25:19  main  Completed stage HDFS Ingestion in 77.7 seconds
+2026-05-01 12:25:19  main  Phase 3: Running Spark ETL to extract edit conflict features from revision histories
+2026-05-01 12:25:20  main  Starting stage Spark ETL
+2026-05-01 12:25:20  spark_etl  Initialising Spark ETL for Wikipedia revision history analysis
+2026-05-01 12:25:25  spark_etl  Parsing revision data from 455 article JSON files
+2026-05-01 12:25:40  spark_etl  Parsed 121417 revision records with revert flags and content sizes
+2026-05-01 12:25:40  spark_etl  Loading Wikidata entity metadata for topic classification
+2026-05-01 12:26:02  spark_etl  Classified 398 articles by topic: political, scientific, cultural
+2026-05-01 12:26:02  spark_etl  Parsing daily pageview time series from Wikimedia REST data
+2026-05-01 12:26:33  spark_etl  Loaded 819337 daily pageview observations for analysis
+2026-05-01 12:26:33  spark_etl  Calculating reversion frequency and editor diversity index for 500 Wikipedia articles
+2026-05-01 12:26:34  spark_etl  Computed edit velocity, reversion rate, and editor diversity for 35 articles
+2026-05-01 12:26:34  spark_etl  Aggregating pageview statistics to identify traffic spikes per article
+2026-05-01 12:26:40  spark_etl  Computed pageview aggregates for 452 articles including spike ratios
+2026-05-01 12:26:40  spark_etl  Joining revision metrics with Wikidata topic labels and pageview signals
+2026-05-01 12:26:45  spark_etl  Produced enriched feature set with 35 articles and 19 feature columns
+2026-05-01 12:26:55  spark_etl  Saved cleaned revision records to /app/data/revisions_clean.parquet
+2026-05-01 12:27:10  spark_etl  Saved Wikidata topic classifications to /app/data/wikidata_clean.parquet
+2026-05-01 12:27:27  spark_etl  Saved daily pageview series to /app/data/pageviews_clean.parquet
+2026-05-01 12:27:39  spark_etl  Saved joined article feature set to /app/data/article_features.parquet
+2026-05-01 12:27:39  spark_etl  Spark ETL pipeline complete for Wikipedia edit conflict detection
+2026-05-01 12:27:39  main  Completed stage Spark ETL in 139.2 seconds
+2026-05-01 12:27:39  main  Phase 4: Building editor interaction networks and detecting edit war episodes
+2026-05-01 12:27:39  main  Starting stage Graph Analysis
+2026-05-01 12:27:39  spark_analysis  Starting network analysis of Wikipedia editor interactions and conflict patterns
+2026-05-01 12:27:42  spark_analysis  Loaded 121417 revision records and 35 article feature vectors for analysis
+2026-05-01 12:27:42  spark_analysis  Constructing editor co-editing network across politically contested articles
+2026-05-01 12:27:45  spark_analysis  Built co-editing network with 2065 weighted edges between editor pairs
+2026-05-01 12:27:45  spark_analysis  Computing degree centrality and clustering coefficients for editor network
+2026-05-01 12:27:50  spark_analysis  Computed centrality metrics for 200 editors in the co-editing network
+2026-05-01 12:27:50  spark_analysis  Scanning revision timelines for edit war episodes across all article categories
+2026-05-01 12:27:51  spark_analysis  Identified 326 weekly windows exhibiting edit war characteristics
+2026-05-01 12:27:51  spark_analysis  Comparing edit conflict intensity across political, scientific, and cultural topics
+2026-05-01 12:27:51  spark_analysis  Generated cross-category conflict comparison for three topic domains
+2026-05-01 12:27:59  spark_analysis  Saved co-editing network edges to parquet
+2026-05-01 12:28:08  spark_analysis  Saved editor network centrality metrics to parquet
+2026-05-01 12:28:11  spark_analysis  Saved detected edit war episodes to parquet
+2026-05-01 12:28:13  spark_analysis  Saved weekly edit statistics for timeline visualisation
+2026-05-01 12:28:15  spark_analysis  Saved topic-level conflict comparison results
+2026-05-01 12:28:15  spark_analysis  Network analysis and edit war detection pipeline completed successfully
+2026-05-01 12:28:16  main  Completed stage Graph Analysis in 37.1 seconds
+2026-05-01 12:28:16  main  Phase 5: Training stability classifiers on Wikipedia edit conflict indicators
+2026-05-01 12:28:17  main  Starting stage ML Classification
+2026-05-01 12:28:17  spark_ml  Initialising machine learning pipeline for Wikipedia stability prediction
+2026-05-01 12:28:18  spark_ml  Loaded enriched feature set with 35 articles for model training
+2026-05-01 12:28:18  spark_ml  Preparing feature vectors from edit metrics for 35 Wikipedia articles
+2026-05-01 12:28:19  spark_ml  Label distribution: 18 stable articles, 17 unstable articles (threshold=0.15)
+2026-05-01 12:28:20  spark_ml  Assembled 10 features per article for stability classification
+2026-05-01 12:28:22  spark_ml  Split dataset: 28 articles for training, 7 for evaluation
+2026-05-01 12:28:22  spark_ml  Training stability classifier on revision metrics for 500 Wikipedia articles
+2026-05-01 12:28:26  spark_ml  Random Forest training complete, evaluating on held-out article set
+2026-05-01 12:28:26  spark_ml  Training Logistic Regression baseline for article stability comparison
+2026-05-01 12:28:33  spark_ml  Logistic Regression training complete, evaluating prediction quality
+2026-05-01 12:28:35  spark_ml  RandomForest evaluation results: accuracy=0.5714, AUC=0.6667, F1=0.5714
+2026-05-01 12:28:35  spark_ml  Confusion matrix for RandomForest:
+2026-05-01 12:28:37  spark_ml  LogisticRegression evaluation results: accuracy=0.7143, AUC=0.7500, F1=0.7143
+2026-05-01 12:28:37  spark_ml  Confusion matrix for LogisticRegression:
+2026-05-01 12:28:37  spark_ml  Feature importance ranking for Wikipedia article stability prediction:
+2026-05-01 12:28:37  spark_ml    edit_velocity: 0.1627
+2026-05-01 12:28:37  spark_ml    avg_content_change: 0.1528
+2026-05-01 12:28:37  spark_ml    sitelinks_count: 0.1428
+2026-05-01 12:28:37  spark_ml    avg_daily_views: 0.1279
+2026-05-01 12:28:37  spark_ml    claims_count: 0.1145
+2026-05-01 12:28:37  spark_ml    pageview_spike_ratio: 0.0977
+2026-05-01 12:28:37  spark_ml    unique_editors: 0.0754
+2026-05-01 12:28:37  spark_ml    editor_diversity: 0.0713
+2026-05-01 12:28:37  spark_ml    total_edits: 0.0360
+2026-05-01 12:28:37  spark_ml    topic_index: 0.0190
+2026-05-01 12:28:40  spark_ml  Saved Random Forest stability predictions to parquet
+2026-05-01 12:28:44  spark_ml  Saved Logistic Regression stability predictions to parquet
+2026-05-01 12:28:44  spark_ml  Saved model evaluation metrics and feature rankings to /app/output/results/ml_metrics.json
+2026-05-01 12:28:44  spark_ml  Machine learning pipeline for edit conflict stability analysis complete
+2026-05-01 12:28:44  main  Completed stage ML Classification in 27.2 seconds
+2026-05-01 12:28:44  main  Phase 6: Writing edit conflict analysis results to MongoDB for querying
+2026-05-01 12:28:45  main  Starting stage MongoDB Write
+2026-05-01 12:28:45  db_writer  Connecting to MongoDB to persist Wikipedia edit conflict analysis results
+2026-05-01 12:28:45  pymongo.serverSelection  {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "ping", "topologyDescription": "<TopologyDescription id: 69f49c7d25298c0fd5229152, topology_type: Unknown, servers: [<ServerDescription ('mongodb', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "69f49c7d25298c0fd5229152"}, "remainingTimeMS": 4}
+2026-05-01 12:28:46  db_writer  Stored edit conflict metrics for 35 curated Wikipedia articles in MongoDB
+2026-05-01 12:28:46  db_writer  Storing edit conflict network metrics for 200 active Wikipedia editors
+2026-05-01 12:28:46  db_writer  Prepared 7 Random Forest stability predictions for MongoDB
+2026-05-01 12:28:46  db_writer  Prepared 7 Logistic Regression stability predictions for MongoDB
+2026-05-01 12:28:46  db_writer  Stored 14 stability prediction records across both classifiers in MongoDB
+2026-05-01 12:28:47  db_writer  Saved topic-level conflict comparison for 2 article categories to MongoDB
+2026-05-01 12:28:47  db_writer  MongoDB write complete: 251 total documents across 4 collections in diss
+2026-05-01 12:28:47  db_writer  All Wikipedia edit conflict results now queryable in MongoDB
+2026-05-01 12:28:47  main  Completed stage MongoDB Write in 1.6 seconds
+2026-05-01 12:28:47  main  Phase 7: Generating conflict pattern charts and network visualisations
+2026-05-01 12:28:48  matplotlib.font_manager  generated new fontManager
+2026-05-01 12:28:49  main  Starting stage Visualisation
+2026-05-01 12:28:49  visualize  Starting visualisation pipeline for Wikipedia edit conflict analysis
+2026-05-01 12:28:49  visualize  Loaded 35 article feature records for visualisation
+2026-05-01 12:28:49  visualize  Loaded 7324 weekly edit statistic records for timeline charts
+2026-05-01 12:28:49  visualize  Generating reversion rate comparison chart across three topic categories
+2026-05-01 12:28:50  visualize  Saved figure to /app/output/figures/fig1_reversion_rates_by_topic.png
+2026-05-01 12:28:50  visualize  Plotting editor diversity against article stability for all curated articles
+2026-05-01 12:28:50  visualize  Saved figure to /app/output/figures/fig2_diversity_vs_stability.png
+2026-05-01 12:28:50  visualize  Rendering edit war timeline for Climate_change article spanning 2020-2024
+2026-05-01 12:28:51  visualize  Saved figure to /app/output/figures/fig3_edit_war_timeline.png
+2026-05-01 12:28:51  visualize  Plotting ROC curves for Random Forest and Logistic Regression classifiers
+2026-05-01 12:28:52  visualize  Saved figure to /app/output/figures/fig4_roc_curves.png
+2026-05-01 12:28:52  visualize  Rendering feature importance chart for article stability prediction model
+2026-05-01 12:28:52  visualize  Saved figure to /app/output/figures/fig5_feature_importance.png
+2026-05-01 12:28:52  visualize  Visualising editor co-editing network for high-conflict Wikipedia article subset
+2026-05-01 12:28:53  visualize  Saved figure to /app/output/figures/fig6_editor_network.png
+2026-05-01 12:28:53  visualize  All six visualisations generated for the Wikipedia edit conflict study
+2026-05-01 12:28:53  main  Completed stage Visualisation in 4.0 seconds
+2026-05-01 12:28:53  main  Phase 8: Running verification checks across all pipeline outputs
+2026-05-01 12:28:53  main  Starting stage Verification
+2026-05-01 12:28:53  verify  Running verification checks across all pipeline stages
+2026-05-01 12:28:53  verify  Verifying downloaded Wikipedia revision and metadata files
+2026-05-01 12:28:53  verify  Found 35 revision history files in local storage
+2026-05-01 12:28:53  verify  Sampled 20006 revision records from first 5 article files for integrity check
+2026-05-01 12:28:53  verify  Found 398 Wikidata entity files in local storage
+2026-05-01 12:28:53  verify  Found 452 pageview data files in local storage
+2026-05-01 12:28:53  verify  Download verification passed: all Wikipedia data files present and well-formed
+2026-05-01 12:28:53  verify  Verifying HDFS ingestion of Wikipedia datasets
+2026-05-01 12:28:54  verify  HDFS directory /user/dattatheya/wikipedia/revisions contains 35 revision files
+2026-05-01 12:28:54  verify  HDFS directory /user/dattatheya/wikidata/entities contains 398 Wikidata files
+2026-05-01 12:28:54  verify  HDFS directory /user/dattatheya/pageviews/daily contains 452 pageview files
+2026-05-01 12:28:54  verify  HDFS ingestion verification complete for Wikipedia data
+2026-05-01 12:28:54  verify  Verifying Spark ETL output parquet files for Wikipedia edit data
+2026-05-01 12:28:54  verify  ETL output cleaned revisions contains 11 parquet part files
+2026-05-01 12:28:54  verify  ETL output Wikidata classifications contains 13 parquet part files
+2026-05-01 12:28:54  verify  ETL output daily pageviews contains 16 parquet part files
+2026-05-01 12:28:54  verify  ETL output joined article features contains 1 parquet part files
+2026-05-01 12:28:54  verify  Spark ETL verification passed: all parquet datasets present with valid content
+2026-05-01 12:28:54  verify  Verifying network analysis and edit war detection results
+2026-05-01 12:28:54  verify  Analysis output verified: co-editing network edges
+2026-05-01 12:28:54  verify  Analysis output verified: editor centrality metrics
+2026-05-01 12:28:54  verify  Analysis output verified: detected edit war episodes
+2026-05-01 12:28:54  verify  Analysis output verified: weekly edit statistics
+2026-05-01 12:28:54  verify  Analysis output verified: topic comparison statistics
+2026-05-01 12:28:54  verify  Network analysis verification passed: all graph and conflict outputs present
+2026-05-01 12:28:54  verify  Verifying machine learning stability classifier outputs
+2026-05-01 12:28:54  verify  ML prediction output verified: rf_predictions.parquet
+2026-05-01 12:28:54  verify  ML prediction output verified: lr_predictions.parquet
+2026-05-01 12:28:54  verify  Model evaluation metrics loaded: RF AUC=0.6667, LR AUC=0.7500
+2026-05-01 12:28:54  verify  Top stability predictor: edit_velocity with importance 0.1627
+2026-05-01 12:28:54  verify  ML pipeline verification passed: both classifiers trained and evaluated
+2026-05-01 12:28:54  verify  Verifying MongoDB collections for Wikipedia edit conflict data
+2026-05-01 12:28:54  pymongo.serverSelection  {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "count", "topologyDescription": "<TopologyDescription id: 69f49c8625298c0fd522924e, topology_type: Unknown, servers: [<ServerDescription ('mongodb', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "69f49c8625298c0fd522924e"}, "remainingTimeMS": 4}
+2026-05-01 12:28:54  verify  MongoDB collection 'article_edit_metrics' contains 35 article edit metrics documents
+2026-05-01 12:28:54  verify  MongoDB collection 'editor_network_metrics' contains 200 editor network metrics documents
+2026-05-01 12:28:54  verify  MongoDB collection 'stability_predictions' contains 14 stability predictions documents
+2026-05-01 12:28:54  verify  MongoDB collection 'topic_comparison' contains 2 topic comparison documents
+2026-05-01 12:28:54  verify  MongoDB verification complete for all edit conflict collections
+2026-05-01 12:28:54  verify  Verifying generated figures for Wikipedia edit conflict study
+2026-05-01 12:28:54  verify  Figure verified: fig1_reversion_rates_by_topic.png (72.9 KB)
+2026-05-01 12:28:54  verify  Figure verified: fig2_diversity_vs_stability.png (73.9 KB)
+2026-05-01 12:28:54  verify  Figure verified: fig3_edit_war_timeline.png (132.8 KB)
+2026-05-01 12:28:54  verify  Figure verified: fig4_roc_curves.png (99.6 KB)
+2026-05-01 12:28:54  verify  Figure verified: fig5_feature_importance.png (58.8 KB)
+2026-05-01 12:28:54  verify  Figure verified: fig6_editor_network.png (98.7 KB)
+2026-05-01 12:28:54  verify  All six visualisations verified for the Wikipedia edit conflict study
+2026-05-01 12:28:54  verify  Pipeline verification summary: 7 of 7 stages passed
+2026-05-01 12:28:54  verify    Stage 'download': PASSED
+2026-05-01 12:28:54  verify    Stage 'hdfs': PASSED
+2026-05-01 12:28:54  verify    Stage 'etl': PASSED
+2026-05-01 12:28:54  verify    Stage 'analysis': PASSED
+2026-05-01 12:28:54  verify    Stage 'ml': PASSED
+2026-05-01 12:28:54  verify    Stage 'mongodb': PASSED
+2026-05-01 12:28:54  verify    Stage 'figures': PASSED
+2026-05-01 12:28:54  verify  Wikipedia edit conflict detection pipeline fully verified and operational
+2026-05-01 12:28:54  main  Completed stage Verification in 1.2 seconds
+2026-05-01 12:28:54  main  Pipeline Execution Summary
+2026-05-01 12:28:54  main    download             COMPLETED
+2026-05-01 12:28:54  main    hdfs_ingest          COMPLETED
+2026-05-01 12:28:54  main    spark_etl            COMPLETED
+2026-05-01 12:28:54  main    spark_analysis       COMPLETED
+2026-05-01 12:28:54  main    spark_ml             COMPLETED
+2026-05-01 12:28:54  main    db_writer            COMPLETED
+2026-05-01 12:28:54  main    visualize            COMPLETED
+2026-05-01 12:28:54  main    verify               COMPLETED
+2026-05-01 12:28:54  main  Overall: 8 of 8 stages completed in 424.3 seconds
+2026-05-01 12:28:54  main  Wikipedia edit conflict detection pipeline finished for 455 articles

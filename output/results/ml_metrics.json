@@ -1,0 +1,56 @@
+{
+  "random_forest": {
+    "model": "RandomForest",
+    "accuracy": 0.5714285714285714,
+    "auc": 0.6666666666666666,
+    "f1": 0.5714285714285715
+  },
+  "logistic_regression": {
+    "model": "LogisticRegression",
+    "accuracy": 0.7142857142857143,
+    "auc": 0.75,
+    "f1": 0.7142857142857142
+  },
+  "feature_importance": [
+    [
+      "edit_velocity",
+      0.16268959066093414
+    ],
+    [
+      "avg_content_change",
+      0.15277575947723215
+    ],
+    [
+      "sitelinks_count",
+      0.14279433677418937
+    ],
+    [
+      "avg_daily_views",
+      0.12792941155611187
+    ],
+    [
+      "claims_count",
+      0.11445013925591059
+    ],
+    [
+      "pageview_spike_ratio",
+      0.09766862553091682
+    ],
+    [
+      "unique_editors",
+      0.07540052994963836
+    ],
+    [
+      "editor_diversity",
+      0.07127740163024777
+    ],
+    [
+      "total_edits",
+      0.036015313312405546
+    ],
+    [
+      "topic_index",
+      0.018998891852413345
+    ]
+  ]
+}
